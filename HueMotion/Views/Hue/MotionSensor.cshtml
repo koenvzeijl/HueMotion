@@ -1,0 +1,22 @@
+﻿@model MotionSensorDetailsViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Hue</h1>
+</div>
+
+<h1>Temperature: <span id="temperature">@Model.Temperature</span></h1>
+<h1>Motion: <span id="motion">@Model.Motion</span></h1>
+<h1>Light Level: <span id="light">@Model.LightLevel</span></h1>
+
+<script>
+    setInterval(refreshPhilipsHueData, 20000);
+
+    function refreshPhilipsHueData(){
+
+        $.getJSON("/Hue/GetHueMotionSensorDetails", function( data ) {
+            document.getElementById("temperature").innerHTML = data.temperature;
+            document.getElementById("motion").innerHTML = data.motion;
+            document.getElementById("light").innerHTML = data.lightLevel;
+        });
+    }
+</script>
